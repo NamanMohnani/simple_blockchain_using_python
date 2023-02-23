@@ -1,0 +1,9 @@
+In this file, I have documentated my journey from creating this blockchain from scratch. 
+This file mainly contains my notes, explaination of my code for my-own understanding
+
+1. created a blockchain class and it has an empty list (one to store our blockchain, another to store transactions).
+2. Block consists of timestamp, a list of transactions, proof and hash of the PREVIOUS block. 
+3. Each block contains hash of previous block which makes this blockchain immutable.
+4. new_transaction(): adds a transaction to the list, it returns the index of the block. Parameter: sender(str, address), recipient(str, address), amount(int)
+5. new_block(): returns a dicitonary named block, parameters: proof(int) which comes from proof-of-work algorithm
+6. PoW is how new blocks are created or mined on the blockchain. In bitcoin, the PoW algorithm is called HashBash.
