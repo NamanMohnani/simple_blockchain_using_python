@@ -2,8 +2,34 @@ In this file, I have documentated my journey from creating this blockchain from 
 This file mainly contains my notes, explaination of my code for my-own understanding
 
 1. created a blockchain class and it has an empty list (one to store our blockchain, another to store transactions).
-2. Block consists of timestamp, a list of transactions, proof and hash of the PREVIOUS block. 
+ -> 2. Block consists of timestamp, a list of transactions, proof and hash of the PREVIOUS block. 
 3. Each block contains hash of previous block which makes this blockchain immutable.
 4. new_transaction(): adds a transaction to the list, it returns the index of the block. Parameter: sender(str, address), recipient(str, address), amount(int)
 5. new_block(): returns a dicitonary named block, parameters: proof(int) which comes from proof-of-work algorithm
 6. PoW is how new blocks are created or mined on the blockchain. In bitcoin, the PoW algorithm is called HashBash.
+7. hash(block): takes block (dict) as input and return string as output.  				
+8. valid_proof: checks if the hash(last_proof, proof) contains 4 leading zeroes, return boolean expression. 
+
+Now the blockchain class is successfully created.
+
+MAIN function:
+
+node_indetifier -> uuid4 to generate a random id, two uuid4 cannot be same, str() convert in string form and replace to remove '-' from the address
+blockchain = Blockchain() -> object of class Blockchain
+
+@app. route("/") is a Python decorator that Flask provides to assign URLs in our app to functions easily
+@app.route("/") is a function of Flask library for web development
+default method is ['GET']
+
+GET -> used to request data from a server
+POST -> used to post data on the server
+
+
+@app.route('/transactions/new', methods=['POST'])
+def new_transaction():  
+Here, in the case of this code, the request object represents the HTTP request sent to the server, 
+and get_json() is a method of the request object that is used to extract the JSON data from the request body.
+The resulting data is stored in the values variable.
+jsonify -> flask framework function that converts Python objects to a JSON-formatted response
+Finally, the return statement sends the JSON response back to the client with a status code of 201. 
+The client will receive the response and can then process it as needed.
