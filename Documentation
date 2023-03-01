@@ -2,7 +2,7 @@ In this file, I have documentated my journey from creating this blockchain from 
 This file mainly contains my notes, explaination of my code for my-own understanding
 
 1. created a blockchain class and it has an empty list (one to store our blockchain, another to store transactions).
- -> 2. Block consists of timestamp, a list of transactions, proof and hash of the PREVIOUS block. 
+2. Block consists of timestamp, a list of transactions, proof and hash of the PREVIOUS block. 
 3. Each block contains hash of previous block which makes this blockchain immutable.
 4. new_transaction(): adds a transaction to the list, it returns the index of the block. Parameter: sender(str, address), recipient(str, address), amount(int)
 5. new_block(): returns a dicitonary named block, parameters: proof(int) which comes from proof-of-work algorithm
@@ -33,3 +33,14 @@ The resulting data is stored in the values variable.
 jsonify -> flask framework function that converts Python objects to a JSON-formatted response
 Finally, the return statement sends the JSON response back to the client with a status code of 201. 
 The client will receive the response and can then process it as needed.
+
+@app.route('/mine', methods=['GET'])
+def mine():
+Here, we use the proof of work algorithm to get the next proof, the user gets a reward for mining the proof.
+
+
+# CONSENSUS ALGORITHM: 
+1. register_node(self, address): adds node to the list, node is a set.
+2. valid_chain(self, chain): checking if a chain is valid by looping through each block and verifying both the hash and the proof, takes chain(list) as input.
+3. resolve_conflicts(self): loops through all neighbouring nodes. This is the consensus algorithm and it resolves by replacing our chain with the longest one in the network.
+
