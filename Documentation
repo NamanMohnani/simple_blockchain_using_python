@@ -42,5 +42,19 @@ Here, we use the proof of work algorithm to get the next proof, the user gets a 
 # CONSENSUS ALGORITHM: 
 1. register_node(self, address): adds node to the list, node is a set.
 2. valid_chain(self, chain): checking if a chain is valid by looping through each block and verifying both the hash and the proof, takes chain(list) as input.
-3. resolve_conflicts(self): loops through all neighbouring nodes. This is the consensus algorithm and it resolves by replacing our chain with the longest one in the network.
+3. resolve_conflicts(self): loops through all neighbouring nodes. This is the consensus algorithm and it resolves by replacing our chain with the longest one in
+    the network.
+    
+these function are added to the class Blockchain. Now, we will a create similar function for our server.
+
+@app.route('/nodes/resolve',methods=['GET'])
+def consensus():
+replaced is an bool (output from resolve_conflicts() function of blockchain class), depending replaced (whether our chian is replaced or not) we will get respective
+response. jsonify is used to convert response into JSON format.
+
+@app.route('/nodes/register',methods=['POST'])
+def register_nodes():
+get_json() is used to get the JSON data sent in the POST request body. If nodes that has address of value (get_json) is NULL, that error statement will be printed.
+for all remaining nodes, they wll be added set of nodes. The response message indicates that new nodes have been added and includes the current list of nodes in 
+the blockchain network.
 
