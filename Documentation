@@ -5,10 +5,14 @@ This file mainly contains my notes, explaination of my code for my-own understan
 2. Block consists of timestamp, a list of transactions, proof and hash of the PREVIOUS block. 
 3. Each block contains hash of previous block which makes this blockchain immutable.
 4. new_transaction(): adds a transaction to the list, it returns the index of the block. Parameter: sender(str, address), recipient(str, address), amount(int)
-5. new_block(): returns a dicitonary named block, parameters: proof(int) which comes from proof-of-work algorithm
+5. new_block(): returns a dicitonary named block, parameters: proof(int) which comes from proof-of-work algorithm - PoW
 6. PoW is how new blocks are created or mined on the blockchain. In bitcoin, the PoW algorithm is called HashBash.
 7. hash(block): takes block (dict) as input and return string as output.  				
 8. valid_proof: checks if the hash(last_proof, proof) contains 4 leading zeroes, return boolean expression. 
+9. Proof Of Work: PoW is a consensus mechanism used in blockchain technology to verify transactions and create new blocks. This algorithm uses the valid-proof methods
+    to check whether the hash of last_block contains leading 4 zeroes or not(valid_proof returns a bool value). it returns this value as the new proof for 
+    the next block in the blockchain. If the proof_of_work is not valid, the chain is considered invalid.
+REMAINING METHODS ARE COVERED IN CONSENSUS PART.
 
 Now the blockchain class is successfully created.
 
@@ -40,10 +44,18 @@ Here, we use the proof of work algorithm to get the next proof, the user gets a 
 
 
 # CONSENSUS ALGORITHM: 
+
 1. register_node(self, address): adds node to the list, node is a set.
-2. valid_chain(self, chain): checking if a chain is valid by looping through each block and verifying both the hash and the proof, takes chain(list) as input.
-3. resolve_conflicts(self): loops through all neighbouring nodes. This is the consensus algorithm and it resolves by replacing our chain with the longest one in
-    the network.
+2. valid_chain(self, chain): this methods takes chain as the input. It starts with 'last_block' whihc is the first block in the /chain[Genesis block], 
+    and the current_index as 1.
+    The method then enters a while loop that iterates through each block in the chain. For each block, the method checks whether the hash of the previous block 
+    (i.e., "last_block") is equal to the "previous_hash" attribute of the current block. If not, it means that the current block is not linked to the previous block, 
+    and hence the chain is invalid.
+    The method returns True if the entire chain has been validated successfully, and False otherwise.
+3. resolve_conflicts(self): resolve_conflict is a part of the consensus algorithm, The consensus algorithm is designed to replace the current chain with the longest 
+   chain in the network, so we start by assuming that our own chain is the longest. This methods checks whether the length of the retrieved chain is longer than
+   "max_length" and whether the chain is valid according to the "valid_chain" method. If both conditions are met, the method updates "max_length" with the new length 
+   and "new_chain" with the new chain. If this function returns False then the current chain is still the longest.
     
 these function are added to the class Blockchain. Now, we will a create similar function for our server.
 
